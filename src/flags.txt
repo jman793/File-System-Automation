@@ -1,3 +1,3 @@
-Homework Path:txt
-Work Path:txt
-Personal Path:txt
+Homework Path:C:\Users\Jonah\TEST\Homework
+Work Path:C:\Users\Jonah\TEST\Work
+Personal Path:C:\Users\Jonah\TEST\Personal
