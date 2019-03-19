@@ -1,3 +1,4 @@
+from Tkinter import *
 import os
 #Change this name to what you want the flags file to be set to
 flagFileName='flags.txt'
@@ -10,6 +11,8 @@ possibleInputs=['yes','no','Yes','No','Y','N']
 yes=['yes','Yes','Y']
 no=['no','No','N']
 map={}
+buttons={}
+window=Tk()
 
 def readInput():
     f=open(flagFileName)
@@ -20,6 +23,16 @@ def readInput():
         lines[i]=lines[i].split('\n',1)[0]
     for i in range(len(lines)):
         map[flags[i]]=lines[i]
+    setupUI()
+#TODO
+def setupUI():
+    for x in flags:
+        buttons[x]=Button(window,text=x,command=buttonHandle)
+        buttons[x].pack()
+
+#TODO
+def buttonHandle():
+    
 
 def userInput():
     print 'Where would you like this file to go?'
