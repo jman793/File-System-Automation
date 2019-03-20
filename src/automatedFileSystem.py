@@ -7,12 +7,28 @@ flagFileName='flags.txt'
 delimitingChar=':'
 lines=[]
 flags=[]
-possibleInputs=['yes','no','Yes','No','Y','N']
-yes=['yes','Yes','Y']
-no=['no','No','N']
+loopcontrol=True
+possibleInputs=['yes','no','Yes','No','Y','N','y','n']
+yes=['yes','Yes','Y','y']
+no=['no','No','N','n']
 map={}
-buttons={}
 window=Tk()
+frame=Frame(master=window,width=500,height=500)
+frame.pack()
+
+
+class ButtonFormat:
+
+    def __init__(self,str):
+        self.b=Button(master=frame,text=str,command=self.buttonHandle)
+        self.b.pack(fill=BOTH,expand=1)
+        self.b.pack_propagate(0)
+
+    def buttonHandle(self):
+        print self.b.cget('text')
+
+
+
 
 def readInput():
     f=open(flagFileName)
@@ -26,24 +42,17 @@ def readInput():
     setupUI()
 #TODO
 def setupUI():
+    label=Label(master=frame,text='Where would you like the file to go?')
+    label.pack()
     for x in flags:
-        buttons[x]=Button(window,text=x,command=buttonHandle)
-        buttons[x].pack()
+        myButtonFormat=ButtonFormat(x)
+    doneButton=Button(master=frame,text='Done',command=done)
+    doneButton.pack()
 
-#TODO
-def buttonHandle():
-    
+def done():
+    window.destroy()
 
-def userInput():
-    print 'Where would you like this file to go?'
-    for x in flags:
-        print x
-    path=raw_input()
-    while path not in flags:
-        print 'Error incorrect input, choose from list'
-        path=raw_input()
-    return path
-
+#TODO reformat this to work with the UI
 def moveFiles(choice):
     path=map[choice]
     os.chdir(path)
@@ -59,6 +68,6 @@ def moveFiles(choice):
             return
     open(raw_input('What would you like to name the file? (add ext)'),"w+")
 
-
 readInput()
-moveFiles(userInput())
+#while(window.winfo_exists()):
+    #pass
