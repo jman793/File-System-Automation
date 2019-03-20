@@ -20,7 +20,6 @@ def readInput():
         lines[i]=lines[i].split('\n',1)[0]
     for i in range(len(lines)):
         map[flags[i]]=lines[i]
-    print map
 
 def userInput():
     print 'Where would you like this file to go?'
@@ -32,15 +31,21 @@ def userInput():
         path=raw_input()
     return path
 
-def moveFiles():
+def moveFiles(choice):
+    path=map[choice]
+    os.chdir(path)
     print 'Would you like to make a new folder for this addition?'
     input=raw_input()
     while input not in possibleInputs:
         print 'Error incorrect input, choose from list'
         input=raw_input()
-    #if input in yes:
-        #TODO
-    #else:
-        #TODO
+    if input in yes:
+        dirName=raw_input('What would you like the directory to be named?')
+        os.mkdir(dirName)
+        if raw_input('Would you like to add a file to this directory?') in no:
+            return
+    open(raw_input('What would you like to name the file? (add ext)'),"w+")
+
 
 readInput()
+moveFiles(userInput())
