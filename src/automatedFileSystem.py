@@ -69,5 +69,4 @@ def moveFiles(choice):
     open(raw_input('What would you like to name the file? (add ext)'),"w+")
 
 readInput()
-#while(window.winfo_exists()):
-    #pass
+window.mainloop()
