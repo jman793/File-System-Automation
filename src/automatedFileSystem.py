@@ -10,7 +10,6 @@ mainWindow=Tk()
 frame=Frame(master=mainWindow,width=500,height=500)
 frame.pack()
 
-
 class ButtonFormat:
 
     def __init__(self,str):
@@ -21,20 +20,12 @@ class ButtonFormat:
     def buttonHandle(self):
         fileBrowswer=tkFileDialog.asksaveasfile(initialdir=map[self.b['text']],mode="w+")
 
-
-
-
 def readInput():
-    lines=[]
-    flags=[]
     f=open(flagFileName)
     for x in f:
-        lines.append(x.split(delimitingChar,1)[-1])
-        flags.append(x.split(' ',1)[0])
-    for i in range(len(lines)):
-        lines[i]=lines[i].split('\n',1)[0]
-    for i in range(len(lines)):
-        map[flags[i]]=lines[i]
+        map[x.split(' ',1)[0]]=x.split(delimitingChar,1)[-1]
+    for x in map.keys():
+        map[x]=map[x].split('\n',1)[0]
     setupUI()
 
 def setupUI():
@@ -43,7 +34,8 @@ def setupUI():
     for x in map.keys():
         myButtonFormat=ButtonFormat(x)
     doneButton=Button(master=frame,text='Done',command=done)
-    doneButton.pack()
+    doneButton.pack_propagate(0)
+    doneButton.pack(fill=BOTH,expand=1)
 
 def done():
     mainWindow.destroy()
