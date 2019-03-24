@@ -1,1 +1,1 @@
-python automatedFileSystem.pyw
+start automatedFileSystem.pyw
